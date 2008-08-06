@@ -1,5 +1,9 @@
 #!/usr/bin/env ruby
 
+# Converts from ASCII vtx (vertices+normals) to ASCII ply.
+# -c indicates that the format is vertices+normals+colors
+# -f will pull in a list of faces formed from the vertices
+
 require 'optparse'
 
 @option_rgb = false
