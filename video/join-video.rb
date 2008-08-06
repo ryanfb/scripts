@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
 
+# Joins all videos in the current directory, or takes a directory
+# as an argument and joins all videos there.
+
 require 'fileutils'
 
 include FileUtils::Verbose
