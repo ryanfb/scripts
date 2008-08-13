@@ -2,10 +2,13 @@
 
 # Originally pulled from http://kpumuk.info/ruby-on-rails/encoding-media-files-in-ruby-using-ffmpeg-mencoder-with-progress-tracking/
 
+require 'progressbar'
+
 class MediaFormatException < StandardError
 end
 
 def execute_mencoder(command)
+	bar = ProgressBar.new("mencoder", 100)
   progress = nil
   IO.popen(command) do |pipe|
     pipe.each("\r") do |line|
@@ -14,12 +17,12 @@ def execute_mencoder(command)
         p = 100 if p > 100
         if progress != p
           progress = p
-          print "PROGRESS: #{progress}\n"
-          $defout.flush
+					bar.set(progress)
         end
       end
     end
   end
+	bar.finish
   raise MediaFormatException if $?.exitstatus != 0
 end
 
