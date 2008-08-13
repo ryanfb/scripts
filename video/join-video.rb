@@ -31,7 +31,7 @@ def join_all_videos(dir = {})
 end
 
 if ARGV.length > 0
-	ARGV.each {|dir| join_all_videos(expand_path(dir) + "/")}
+	ARGV.each {|dir| join_all_videos(File.expand_path(dir) + "/")}
 else
 	join_all_videos
 end
