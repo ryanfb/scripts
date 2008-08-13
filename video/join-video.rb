@@ -4,6 +4,7 @@
 # as an argument and joins all videos there.
 
 require 'fileutils'
+require File.join(File.expand_path(File.dirname(__FILE__)), "media-commands")
 
 include FileUtils::Verbose
 
@@ -24,5 +25,5 @@ if mediafiles.length > 1
 	
 	command = "mencoder -forceidx -noodml -oac copy -ovc copy -o \"#{output}\" #{input}"
 	
-	system(command)
+	execute_mencoder(command)
 end
