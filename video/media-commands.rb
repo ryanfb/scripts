@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-# Originally pulled from http://kpumuk.info/ruby-on-rails/encoding-media-files-in-ruby-using-ffmpeg-mencoder-with-progress-tracking/
+# Originally pulled from http://tinyurl.com/vmo7g
 
 require 'progressbar'
 
