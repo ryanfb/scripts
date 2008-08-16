@@ -28,6 +28,10 @@ def join_all_videos(dir = {})
 		
 		execute_mencoder(command)
 	end
+	
+	if dir != {}
+		chdir("..")
+	end
 end
 
 if ARGV.length > 0
