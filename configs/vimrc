@@ -1,0 +1,96 @@
+" Initially stolen from:	Bram Moolenaar <Bram@vim.org>
+
+" Use Vim settings, rather then Vi settings (much better!).
+" This must be first, because it changes other options as a side effect.
+set nocompatible
+
+" allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+
+set history=1000		" keep 1000 lines of command line history
+set ruler		" show the cursor position all the time
+set showcmd		" display incomplete commands
+set incsearch		" do incremental searching
+
+" For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
+" let &guioptions = substitute(&guioptions, "t", "", "g")
+
+" Don't use Ex mode, use Q for formatting
+map Q gq
+
+" This is an alternative that also works in block mode, but the deleted
+" text is lost and it only works for putting the current register.
+"vnoremap p "_dp
+
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+if &t_Co > 2 || has("gui_running")
+  syntax on
+  set hlsearch
+endif
+
+" Only do this part when compiled with support for autocommands.
+if has("autocmd")
+
+  " Enable file type detection.
+  " Use the default filetype settings, so that mail gets 'tw' set to 72,
+  " 'cindent' is on in C files, etc.
+  " Also load indent files, to automatically do language-dependent indenting.
+  filetype plugin indent on
+
+  " Put these in an autocmd group, so that we can delete them easily.
+  augroup vimrcEx
+  au!
+
+  " For all text files set 'textwidth' to 78 characters.
+  autocmd FileType text setlocal textwidth=78
+
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it when the position is invalid or when inside an event handler
+  " (happens when dropping a file on gvim).
+  autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+
+  augroup END
+
+else
+
+  set autoindent		" always set autoindenting on
+
+endif " has("autocmd")
+
+" set mouse=a
+
+" set foldmethod=indent
+" set foldlevel=0
+set number
+set tabstop=2
+set shiftwidth=2
+
+" set expandtab
+
+set foldenable!
+
+colorscheme desert
+
+" vim: set ft=vim :
+"-- Use TAB to complete when typing words, else inserts TABs as usual.
+"-- Uses dictionary and source files to find matching words to complete.
+
+"-- See help completion for source,
+"-- Note: usual completion is on <C-n> but more trouble to press all the time.
+"-- Never type the same word twice and maybe learn a new spellings!
+"-- Use the Linux dictionary when spelling is in doubt.
+"-- Window users can copy the file to their machine.
+"-- http://www.cs.albany.edu/~mosh - Mohsin Ahmed
+
+function! Mosh_Tab_Or_Complete()
+    if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
+        return "\<C-N>"
+    else
+        return "\<Tab>"
+endfunction
+
+:inoremap <Tab> <C-R>=Mosh_Tab_Or_Complete()<CR>
