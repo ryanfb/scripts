@@ -24,6 +24,14 @@ else
   unless File.directory? current
     FU.mkdir_p current
     warn "Created messdir #{current}"
+
+    # Set a snazzy icon on Mac OS X
+    iconfile = File.join(MESSDIR, "icon")
+    if File.exist?(iconfile)
+      FU.cp(iconfile, File.join(current,"Icon?"))
+      system("/Developer/Tools/SetFile -a C #{current}")
+      warn "Set icon"
+    end
   end
 
   if File.exist?(current_link) && !File.symlink?(current_link)
