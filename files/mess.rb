@@ -28,7 +28,7 @@ else
     # Set a snazzy icon on Mac OS X
     iconfile = File.join(MESSDIR, "Icon\r")
     if File.exist?(iconfile)
-      FU.cp(iconfile, File.join(current,"Icon\r"))
+      system("cp #{iconfile} #{File.join(current,"Icon\r")}")
       system("/Developer/Tools/SetFile -a C #{current}")
       warn "Set icon"
     end
