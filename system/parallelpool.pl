@@ -90,7 +90,7 @@ while (@args || $proc_cnt) {
 	    if (ref($arg) eq 'ARRAY') {
 		exec($opt{c}, @{$arg});
 	    } else {
-		exec($opt{c}, $arg);
+		exec("$opt{c} $arg");
 	    }
 	    die "Exec failed: $!";
 	}
