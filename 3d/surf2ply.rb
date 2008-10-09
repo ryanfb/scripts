@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 # Converts from ASCII surf (vertices+uv+faces) to ASCII ply.
-# -c indicates that the format is vertices+normals+colors
+# -c indicates we want conversion from UV to RGB (unimplemented)
 # -f will pull in a list of faces formed from the vertices
 
 require 'optparse'
