@@ -36,7 +36,7 @@ end
 face_head = surf.gets
 faces = []
 if face_head =~/Triangles (\d+)/
-	read_elements( surf, $1, faces) { |e| e.to_i - 1 }
+	read_elements(surf, $1, faces) { |e| e.to_i - 1 }
 end
 
 ply.puts "ply"
