@@ -10,7 +10,7 @@ require 'optparse'
 
 opts = OptionParser.new
 opts.on('-c', '--color') { @option_rgb = true }
-opts.on('-f', '--faces file') { |f| @option_faces = f }
+opts.on('-f MANDATORY', '--faces MANDATORY') { |f| @option_faces = f }
 
 opts.parse!(ARGV)
 
